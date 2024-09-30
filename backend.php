@@ -8,6 +8,9 @@ if(isset($_POST["reg_user"])){
     $phone = $_POST["phone"];
     $password = $_POST["password"];
     $password_verify = $_POST["password_verify"];
+
+    $unique = "SELECT email FROM register WHERE email = '$email' ";
+    $find_exist = mysqli_query($conn,$unique);
     
     if($password!= $password_verify){
         $res =[
@@ -16,9 +19,7 @@ if(isset($_POST["reg_user"])){
         ];
         echo json_encode($res);
     }
-    $unique = "SELECT email FROM register WHERE email = '$email' ";
-    $find_exist = mysqli_query($conn,$unique);
-    if(mysqli_num_rows($find_exist)){
+    elseif(mysqli_num_rows($find_exist)){
         $res=[
             "status"=>300,
             "message"=>"Email already exists"

@@ -94,9 +94,9 @@ include("db.php");
         processData: false,
         contentType: false,
         success: function(res) {
-          var res = jQuery.parseJSON(res);
+          var res =jQuery.parseJSON(res);
           console.log(res);
-          if (res.status = 200) {
+          if (res.status == 200) {
             swal({
               title: "Success",
               text: res.message,
@@ -106,11 +106,11 @@ include("db.php");
               window.location.href = "home.php";
             })
 
-          } else {
+          } else if(res.status == 400) {
             alert(res.message);
           }
 
-        }
+        } 
 
       })
     })
